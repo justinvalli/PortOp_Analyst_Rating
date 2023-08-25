@@ -1,6 +1,5 @@
 # Portfolio Optimization Analyst Rating
 
-
 ## Unlocking Insights 2.0: A Cutting-Edge Approach to Sell-Side Equity Research with Advanced Machine Learning Models
 
 [INSERT SCREENSHOT OF THE TITLE SLIDE HERE SIMILAR TO BELOW]
@@ -28,9 +27,7 @@ from tensorflow.keras.models import Sequential
 from keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler,OneHotEncoder
-import pandas as pd
 import seaborn as sns
-import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 from matplotlib_venn import venn2
 import numpy as np
@@ -92,17 +89,12 @@ classifier = pipeline('sentiment-analysis')
 
 ![Intro Image](read_me_images/random_forest.png)
 
-By examining the distribution of key variables' closing prices, we gain insights into their behavior.
-This information is crucial for understanding market trends, volatility, and potential investment opportunities.
+We look at the distribution of the independent variables in our model in order to observe market trends and volatility.
 
-Key Takeaways: 
-* GLD: The distribution of GLD closing prices appears symmetric, with most prices centered around a particular value.
-* VNQ: VNQ's distribution is slightly skewed, suggesting some variations in its closing prices.
-* USO: USO's distribution shows a narrow spread, indicating relatively stable closing prices.
-* TSLA: TSLA's distribution has a wide spread, indicating greater volatility in its closing prices.
-* AAPL: AAPL's distribution resembles a bell curve, which is common in well-behaved datasets.
-* AGG: AGG's distribution appears symmetric, suggesting a consistent range of closing prices.
-* JNK: JNK's distribution exhibits a single peak, showing a dominant range of closing prices.
+We found some interesting insights in the histograms:  
+* GLD: The distribution of GLD closing prices looks almost symmetric
+* VNQ: VNQ's distribution is slightly skewed, suggesting  variation within its closing prices.
+* USO: USO's distribution shows a narrow spread, indicating stable prices.
 
 ```
 # Define the key variables
@@ -146,33 +138,12 @@ plt.show()
 
 ![Intro Image](read_me_images/random_forest.png)
 
-Exploring Trends Over Time:
+We utilize time series plots to show how the prices of the independent variables (GLD, VNQ, USO, TSLA, AAPL, AGG, JNK) change over the given time period. We noticed some interesting trends:
 
-Understanding Price Movements: Time series plots show how the prices of key variables (GLD, VNQ, USO, TSLA, AAPL, AGG, JNK) change over
-the given time period (as indicated by the "Date" on the x-axis).
-Identifying Trends: By observing the trajectory of the lines, you can identify trends such as upward or downward movement, 
-stability, or periods of volatility.
-Detecting Seasonality:
+( 1 ) Gold as a safe haven - The upward trend in Gold during periods of market turbulence suggests that investors turned to gold during uncertain times and sudden spikes related to geopolitical events or economic instability
+( 2 ) Fluctuations in Oil market dynamics related to OPEC decisions, geopolitical tensions, and economic growth affecting oil prices - energy market conditions
+( 3 ) TSLA and APPL trends can provide insight into the technology sector's overall health, indicating robust consumer demand
 
-Recurring Patterns: Time series plots can reveal recurring patterns or seasonality in the data.
-These patterns may correspond to certain times of the year or economic cycles.
-Identifying Anomalies and Outliers:
-
-Unusual Movements: Sudden spikes or drops in the plot can indicate anomalies or outliers. 
-These may be caused by significant events affecting the market.
-Understanding Volatility:
-
-Fluctuations: The degree of movement in the plot indicates the volatility of the variable's price.
-Wide fluctuations suggest higher volatility, while steadier movements suggest stability.
-Impact of External Factors:
-
-News and Events: Time series plots can show how external events, such as economic announcements or major news,
-impact the prices of the key variables.
-Long-term and Short-term Analysis:
-
-Observing Long-term Trends: By analyzing the entire time range, you can spot long-term trends, enabling you to make 
-informed investment decisions.
-Zooming into Short-term Movements: You can also zoom into shorter time periods to analyze short-term movements and make tactical decisions.
 
 ```
 # Define the time variables
@@ -217,26 +188,7 @@ plt.show()
 
 Pairplot for Exploratory Data Analysis (EDA):
 
-Visual Exploration: Pairplot displays scatter plots for selected variables, 
-providing a quick visual exploration of relationships and trends between pairs of variables.
-
-Correlation Insight: It helps identify positive/negative correlations between variables.
-Correlated variables can impact model performance and guide feature selection.
-
-Pattern Recognition: Scatter plots reveal patterns like clusters, trends, and outliers,
-aiding in understanding data behavior and potential anomalies.
-
-Distribution Insight: Histograms on the diagonal show variable distributions, 
-offering a snapshot of their characteristics.
-
-Decision Support: Pairplots assist in selecting variables for modeling by highlighting informative relationships.
-
-Non-Technical Communication: The visual nature of pairplots makes them effective for
-communicating insights to non-technical stakeholders.
-
-Preprocessing Hints: Nonlinear relationships and skewed distributions might prompt data transformation or preprocessing.
-
-Limitation Awareness: Detecting multicollinearity, where variables are highly correlated, is vital as it can impact model interpretation.
+We used a pair plot to see visual representations of relationships and trends between pairs of variables.
 
 ```
 # Define the selected variables
@@ -268,15 +220,7 @@ plt.show()
 
 ![Intro Image](read_me_images/random_forest.png)
 
-In the context of your machine-learning model,
-This heatmap helps you identify potential multicollinearity
-between independent variables, which might affect the model's performance 
-or interpretation. If two independent variables are highly correlated,
-It could mean they provide similar information to the model,
-and you might consider removing one to avoid redundancy.
-
- It doesn't directly indicate the relationship between the independent variables and the excluded "Signal" variable,
- since the heatmap only considers pairwise relationships between the independent variables.
+We want to identify multicollinearity between independent variables to determine if they should be included in the machine learning models. 
 
 ```
 # Exclude the 'signal' column from the DataFrame
@@ -302,7 +246,7 @@ plt.show()
 
 ![Intro Image](read_me_images/random_forest.png)
 
-Our first attempt the predictors using Apples P/E ratio, and 50 and 200 day MA, and included other variables of 1 and 5 year treasury yields and a news score based on sentiment. Running this model resulted in a 57% Precision Score. The second Random Forest attempt using 23 years of price data with predictors of daily Apple; volume, open, high, low and close prices resulted in a 55% Precision score.
+This algorithm yielded a resounding accuracy score in discerning the “Buy” or “Sell” signal.
 
 ```
 #Imprt Random Forest
@@ -313,7 +257,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 ![Intro Image](read_me_images/random_forest.png)
 
-Our first attempt the predictors using Apples P/E ratio, and 50 and 200 day MA, and included other variables of 1 and 5 year treasury yields and a news score based on sentiment. Running this model resulted in a 57% Precision Score. The second Random Forest attempt using 23 years of price data with predictors of daily Apple; volume, open, high, low and close prices resulted in a 55% Precision score.
+After backtesting and manual optimization, we found the logistic regression to yield very high accuracy when predicting the correct BUY or SELL classification. 
 
 ```
 #Imprt Random Forest
@@ -324,7 +268,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 ![Intro Image](read_me_images/random_forest.png)
 
-Our first attempt the predictors using Apples P/E ratio, and 50 and 200 day MA, and included other variables of 1 and 5 year treasury yields and a news score based on sentiment. Running this model resulted in a 57% Precision Score. The second Random Forest attempt using 23 years of price data with predictors of daily Apple; volume, open, high, low and close prices resulted in a 55% Precision score.
+After backtesting and manual optimization, we found the logistic regression to yield very high accuracy when predicting the correct BUY or SELL classification.  
 
 ```
 #Imprt Random Forest
@@ -335,7 +279,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 ![Intro Image](read_me_images/random_forest.png)
 
-Our first attempt the predictors using Apples P/E ratio, and 50 and 200 day MA, and included other variables of 1 and 5 year treasury yields and a news score based on sentiment. Running this model resulted in a 57% Precision Score. The second Random Forest attempt using 23 years of price data with predictors of daily Apple; volume, open, high, low and close prices resulted in a 55% Precision score.
+After backtesting and manual optimization, we found a significant increase in the accuracy score of the model for predicting the correct BUY or SELL classification. 
 
 ```
 #Imprt Random Forest
