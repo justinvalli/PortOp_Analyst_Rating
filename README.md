@@ -176,7 +176,6 @@ Our first attempt the predictors using Apples P/E ratio, and 50 and 200 day MA, 
 from sklearn.ensemble import RandomForestClassifier
 ```
 
-```
 ## [INSERT STREAMLIT HERE]
 
 ![Intro Image](read_me_images/logistic_regression_results.png) [INSERT STREAMLIT EXPLANATION OF RESULTS HERE]
