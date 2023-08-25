@@ -11,9 +11,7 @@ This file will explore Portfolio Optimization utilizing the Efficient Frontier, 
 
 > Note: `analyst_rating` is found in main folder. `sentiment_analysis_data` is found the Analysis Folder. The three models can be found in the Machine Learning Folder.
 
-Import the following dependencies and libraries: 
-
-### Imports: 
+### Import the following libraries and dependencies: 
 ```
 import pandas as pd
 from sklearn.model_selection import train_test_split
