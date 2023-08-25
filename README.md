@@ -13,51 +13,26 @@ This file will explore Portfolio Optimization utilizing the Efficient Frontier, 
 
 Import the following dependencies and libraries: 
 
-### Analyst Rating: 
+### Imports: 
 ```python
 import pandas as pd
-from pathlib import Path
-import yfinance as yf
-from sklearn.impute import SimpleImputer
-import numpy as np
-```
-
-### Sentiment Analysis: 
-```python
-from alpaca_trade_api import REST, Stream
-from transformers import pipeline
-import pandas as pd
-from pathlib import Path
-import numpy as np
-```
-
-### Neural Network Model: 
-```python
+from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
+from sklearn.metrics import accuracy_score
 import pandas as pd
 from pathlib import Path
 import tensorflow as tf
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.models import Sequential
+from keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler,OneHotEncoder
-```
-
-### Logistic Regression Model: 
-```python
 import pandas as pd
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import classification_report
-from sklearn.model_selection import GridSearchCV
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import Pipeline
-```
-
-### RandomForest Model: 
-```python
-import yfinance as yf
-import pandas as pd
-import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+from matplotlib_venn import venn2
+import numpy as np
 ```
 
 ### Read and open `analyst_rating.csv` to the three models (Neural Network, RandomForest, LogisticRegression) 
