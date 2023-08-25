@@ -2,12 +2,11 @@
 
 ## Unlocking Insights 2.0: A Cutting-Edge Approach to Sell-Side Equity Research with Advanced Machine Learning Models
 
-[INSERT SCREENSHOT OF THE TITLE SLIDE HERE SIMILAR TO BELOW]
 ![Intro Image](read_me_images/intro.png)
 
 This file will explore Portfolio Optimization utilizing the Efficient Frontier, as well as Machine Learning to determine the optimal weights of assets in a portfolio. The portfolio contains eight assets: GLD (Gold), VNQ (Real Estate), USO (Oil Commodity), K (Consumer Staple), AAPL (Tech), TSLA (Tech), AGG (Investment Grade Bonds), JNK (Junk Bonds). We look to the risk/return tradeoff using two portfolio options: the Sharpe optimized portfolio, as well as the minimum volatility (low risk) portfolio. We utilize two categories of indicators: technical (moving averages, price changes, etc.) as well as macro indicators (yield curve). Finally, we utilize four predictive machine learning models: the random forest, the logistic regression, the neural network, and the XGBoost algorithm. 
 
-[INSERT SCREENSHOT OF THE FLOWCHART HERE]
+![Intro Image](read_me_images/flow_chart.png)
 
 ## Usage: 
 
@@ -58,12 +57,11 @@ For example:
 
 Now that we have built out the primary dataset, we can begin to use Machine Learning to build a predictive classification model.
 
-[INSERT IMAGE FOR DATASET BUILDING HERE]
-![Intro Image](read_me_images/dataset.png)
+![Intro Image](read_me_images/data_preparation.png)
 
 ## The Efficient Frontier: 
 
-[INSERT EFFICIENT FRONTIER IMAGES HERE]
+![Intro Image](read_me_images/efficient_frontier_1.png)
 [INSERT THE EFFICIENT FRONTIER CODE AND INTRODUCTION HERE]
 
 ```[INSERT CODE HERE FOR EFFICIENT FRONTIER HERE]
@@ -71,15 +69,14 @@ Now that we have built out the primary dataset, we can begin to use Machine Lear
 
 ## The Efficient Frontier 2.0: 
 
-[INSERT EFFICIENT FRONTIER 2.0 IMAGES HERE]
+![Intro Image](read_me_images/efficient_frontier_2.png)
 [INSERT THE EFFICIENT FRONTIER 2.0 CODE AND INTRODUCTION HERE]
 
 ```[INSERT CODE HERE FOR EFFICIENT FRONTIER 2.0 HERE]
 ```
 ## Exploratory Data Analysis: Distribution of Key Variables
 
-[INSERT EDA IMAGES HERE]
-![Intro Image](read_me_images/random_forest.png)
+![Intro Image](read_me_images/histogram.png)
 
 We look at the distribution of the independent variables in our model in order to observe market trends and volatility.
 
@@ -128,8 +125,7 @@ plt.show()
 
 ## Exploratory Data Analysis: Time Series
 
-[INSERT EDA IMAGES HERE]
-![Intro Image](read_me_images/random_forest.png)
+![Intro Image](read_me_images/time_series.png)
 
 We utilize time series plots to show how the prices of the independent variables (GLD, VNQ, USO, TSLA, AAPL, AGG, JNK) change over the given time period. We noticed some interesting trends:
 
@@ -177,8 +173,7 @@ plt.show()
 
 ## Exploratory Data Analysis: Pairplot
 
-[INSERT EDA IMAGES HERE]
-![Intro Image](read_me_images/random_forest.png)
+![Intro Image](read_me_images/pairplot.png)
 
 Pairplot for Exploratory Data Analysis (EDA):
 
@@ -212,8 +207,7 @@ plt.show()
 
 ## Exploratory Data Analysis: Pairwise Correlation Heatmap
 
-[INSERT EDA IMAGES HERE]
-![Intro Image](read_me_images/random_forest.png)
+![Intro Image](read_me_images/heatmap.png)
 
 We want to identify multicollinearity between independent variables to determine if they should be included in the machine learning models. 
 
@@ -239,8 +233,7 @@ plt.show()
 
 ## XGBoost Model: 
 
-[INSERT XGBOOST IMAGE HERE]
-![Intro Image](read_me_images/random_forest.png)
+![Intro Image](read_me_images/xg_boost.png)
 
 This algorithm yielded a resounding accuracy score in discerning the “Buy” or “Sell” signal.
 
@@ -264,7 +257,7 @@ from sklearn.ensemble import RandomForestClassifier
 ## LogisticRegression Model: 
 
 [INSERT LOGISTIC REGRESSION IMAGE HERE]
-![Intro Image](read_me_images/random_forest.png)
+![Intro Image](read_me_images/logistic_regression_results.png)
 
 After backtesting and manual optimization, we found the logistic regression to yield very high accuracy when predicting the correct BUY or SELL classification.  
 
@@ -275,7 +268,7 @@ After backtesting and manual optimization, we found the logistic regression to y
 ## NeuralNetwork Model: 
 
 [INSERT NEURAL NETWORK IMAGE HERE]
-![Intro Image](read_me_images/random_forest.png)
+![Intro Image](read_me_images/neural_network.png)
 
 After backtesting and manual optimization, we found a significant increase in the accuracy score of the model for predicting the correct BUY or SELL classification. 
 
