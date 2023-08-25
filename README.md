@@ -14,7 +14,7 @@ This file will explore Portfolio Optimization utilizing the Efficient Frontier, 
 Import the following dependencies and libraries: 
 
 ### Imports: 
-```python
+```
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
