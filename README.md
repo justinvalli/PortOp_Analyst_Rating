@@ -3,10 +3,12 @@
 
 ## Unlocking Insights 2.0: A Cutting-Edge Approach to Sell-Side Equity Research with Advanced Machine Learning Models
 
-
+[INSERT SCREENSHOT OF THE TITLE SLIDE HERE SIMILAR TO BELOW]
 ![Intro Image](read_me_images/intro_image.png)
 
 This file will explore Portfolio Optimization utilizing the Efficient Frontier, as well as Machine Learning to determine the optimal weights of assets in a portfolio. The portfolio contains eight assets: GLD (Gold), VNQ (Real Estate), USO (Oil Commodity), K (Consumer Staple), AAPL (Tech), TSLA (Tech), AGG (Investment Grade Bonds), JNK (Junk Bonds). We look to the risk/return tradeoff using two portfolio options: the Sharpe optimized portfolio, as well as the minimum volatility (low risk) portfolio. We utilize two categories of indicators: technical (moving averages, price changes, etc.) as well as macro indicators (yield curve). Finally, we utilize four predictive machine learning models: the random forest, the logistic regression, the neural network, and the XGBoost algorithm. 
+
+[INSERT SCREENSHOT OF THE FLOWCHART HERE]
 
 ## Usage: 
 
@@ -34,14 +36,17 @@ from matplotlib_venn import venn2
 import numpy as np
 ```
 
-### Read and open `analyst_rating.csv` to the three models (Neural Network, RandomForest, LogisticRegression) 
-```python
-pd.read_csv("Resources/dataset.csv", index_col="2021 - 2023 AAPL Daily Data (Index)", infer_datetime_format=True, parse_dates=True)
+### Read and open `max_rating.csv` and `min_rating.csv` for the four models (XGBoost, Neural Network, RandomForest, LogisticRegression) 
+```# Read the applicants_data.csv file from the Resources folder into a Pandas DataFrame
+df = df = pd.read_csv("max_rating.csv")
+
+# Review the DataFrame
+df
 ```
 
-## Usage for `analyst_rating.ipynb`:
+## Usage for `max_rating.csv` and `min_rating.csv`:
 
-Split the data by quarterly time ranges. This will make it easier to combine fundamental data. 
+[INSERT DATA MANIPULATION PROCESS HERE] 
 
 For example: 
 
@@ -58,72 +63,114 @@ aapl_1['EBITDA'] = 31260000000
 
 > Note: EPS and EBITDA were hard-coded into the data frame. You can view these values in Yahoo Finance. 
 
+## Dataset Building: 
 
-Make sure to replace string values provided in the `cashflow` and `balancesheet` data. The only way the data frame can recognize all data is to transform them to float64 values.
+[INSERT DETAILS ABOUT DATASET BUILDING HERE]
 
-```python
-# Begin to clean strings dtypes by replacing commas 
-aapl_df['Total Debt']= aapl_df['Total Debt'].str.replace(',','')
-aapl_df['Shares']= aapl_df['Shares'].str.replace(',','')
-aapl_df['Cash']= aapl_df['Cash'].str.replace(',','')
+Now that we have built out the primary dataset, we can begin to use Machine Learning to build a predictive classification model.
 
-# Change all columns to float64
-aapl_df = aapl_df.astype(float)
-```
+![Intro Image](read_me_images/dataset.png)
 
-For the missing values (NaN) found when finding the moving averages, use `SimpleImputer` to replace NaN values to the mean.
+## The Efficient Frontier: 
 
-```python
-# Replace NaN values with SimpleImputer. Fit and Transform this data.
-imp_mean = SimpleImputer(missing_values=np.nan, strategy='mean')
-aapl_df = imp_mean.fit_transform(aapl_df)
-
-# Make aapl_df as a DataFrame and review first 5 rows in data
-aapl_df = pd.DataFrame(aapl_df)
-aapl_df.head()
-```
-
-In Part 6, we create 'Buy' and 'Sell' Signals. When importing data and running the ML Models, change the string to float64 values to be able to run the analysis properly. This is the Y Target. 
-
-
-```python
-aapl_df['Recommendation'] = aapl_df['Recommendation'].replace({'Buy': 1, 'Sell': -1})
-```
-
-## Sentiment Analysis Usage: 
-
-Run `pipeline` as a natural language processing predicted model to be able to fit and transform a 'Positive or Negative' news and confidence rating of this news. 
+[INSERT THE EFFICIENT FRONTIER CODE AND INTRODUCTION HERE]
 
 ```python
 # Call pipeline to run `sentiment-analysis`
 classifier = pipeline('sentiment-analysis')
 ```
 
-Running a for loop will allow you to scan through the news articles and report date, news, and result. 
+## The Efficient Frontier 2.0: 
+
+[INSERT THE EFFICIENT FRONTIER 2.0 CODE AND INTRODUCTION HERE]
 
 ```python
-result1 = []
-date1=[]
-
-for story in news1:
-    # print(story.headline)
-    score = classifier(story.summary)
-    result1.append(score)
-    time = story.created_at
-    date1.append(time)
+# Call pipeline to run `sentiment-analysis`
+classifier = pipeline('sentiment-analysis')
 ```
+## Exploratory Data Analysis: Distribution of Key Variables
 
-Create an export .csv file to be able to import this data to analyst_rating, which is the main dataset script. 
+![Intro Image](read_me_images/random_forest.png)
 
-```python
-## Export to .csv
-ch3.to_csv('sentiment_analysis.csv')
+Our first attempt the predictors using Apples P/E ratio, and 50 and 200 day MA, and included other variables of 1 and 5 year treasury yields and a news score based on sentiment. Running this model resulted in a 57% Precision Score. The second Random Forest attempt using 23 years of price data with predictors of daily Apple; volume, open, high, low and close prices resulted in a 55% Precision score.
+
 ```
-## Dataset Building: 
+#Imprt Random Forest
+from sklearn.ensemble import RandomForestClassifier
+```
+```
+#initial model, n_estimators = number of decision trees, min_sample_spit protects from overfitting, 
+#random_state =1 to be able to re-run model with same results. train = -100 is all rows except last 100 rows.
+model = RandomForestClassifier(n_estimators=175, min_samples_split=100, random_state=1)
+train = data.iloc[:-100]
+test = data.iloc[-100:]
+#predictors used
+predictors = ["Close", "Open", "High", "Low", "Volume"]
+model.fit(train[predictors], train["Signal"])
 
-Now that we have built out the primary dataset, we can begin to use Machine Learning to build a predictive classification model.
+## Exploratory Data Analysis: Time Series
 
-![Intro Image](read_me_images/dataset.png)
+![Intro Image](read_me_images/random_forest.png)
+
+Our first attempt the predictors using Apples P/E ratio, and 50 and 200 day MA, and included other variables of 1 and 5 year treasury yields and a news score based on sentiment. Running this model resulted in a 57% Precision Score. The second Random Forest attempt using 23 years of price data with predictors of daily Apple; volume, open, high, low and close prices resulted in a 55% Precision score.
+
+## Exploratory Data Analysis: Pairplot
+
+![Intro Image](read_me_images/random_forest.png)
+
+Our first attempt the predictors using Apples P/E ratio, and 50 and 200 day MA, and included other variables of 1 and 5 year treasury yields and a news score based on sentiment. Running this model resulted in a 57% Precision Score. The second Random Forest attempt using 23 years of price data with predictors of daily Apple; volume, open, high, low and close prices resulted in a 55% Precision score.
+
+## Exploratory Data Analysis: Pairwise Correlation Heatmap
+
+![Intro Image](read_me_images/random_forest.png)
+
+Our first attempt the predictors using Apples P/E ratio, and 50 and 200 day MA, and included other variables of 1 and 5 year treasury yields and a news score based on sentiment. Running this model resulted in a 57% Precision Score. The second Random Forest attempt using 23 years of price data with predictors of daily Apple; volume, open, high, low and close prices resulted in a 55% Precision score.
+
+```
+#Imprt Random Forest
+from sklearn.ensemble import RandomForestClassifier
+```
+```
+#initial model, n_estimators = number of decision trees, min_sample_spit protects from overfitting, 
+#random_state =1 to be able to re-run model with same results. train = -100 is all rows except last 100 rows.
+model = RandomForestClassifier(n_estimators=175, min_samples_split=100, random_state=1)
+train = data.iloc[:-100]
+test = data.iloc[-100:]
+#predictors used
+predictors = ["Close", "Open", "High", "Low", "Volume"]
+model.fit(train[predictors], train["Signal"])
+
+
+```
+#Imprt Random Forest
+from sklearn.ensemble import RandomForestClassifier
+```
+```
+#initial model, n_estimators = number of decision trees, min_sample_spit protects from overfitting, 
+#random_state =1 to be able to re-run model with same results. train = -100 is all rows except last 100 rows.
+model = RandomForestClassifier(n_estimators=175, min_samples_split=100, random_state=1)
+train = data.iloc[:-100]
+test = data.iloc[-100:]
+#predictors used
+predictors = ["Close", "Open", "High", "Low", "Volume"]
+model.fit(train[predictors], train["Signal"])
+
+
+```
+#Imprt Random Forest
+from sklearn.ensemble import RandomForestClassifier
+```
+```
+#initial model, n_estimators = number of decision trees, min_sample_spit protects from overfitting, 
+#random_state =1 to be able to re-run model with same results. train = -100 is all rows except last 100 rows.
+model = RandomForestClassifier(n_estimators=175, min_samples_split=100, random_state=1)
+train = data.iloc[:-100]
+test = data.iloc[-100:]
+#predictors used
+predictors = ["Close", "Open", "High", "Low", "Volume"]
+model.fit(train[predictors], train["Signal"])
+
+
 
 ## XGBoost Model: 
 
