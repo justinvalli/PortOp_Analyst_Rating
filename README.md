@@ -58,10 +58,12 @@ For example:
 
 Now that we have built out the primary dataset, we can begin to use Machine Learning to build a predictive classification model.
 
+[INSERT IMAGE FOR DATASET BUILDING HERE]
 ![Intro Image](read_me_images/dataset.png)
 
 ## The Efficient Frontier: 
 
+[INSERT EFFICIENT FRONTIER IMAGES HERE]
 [INSERT THE EFFICIENT FRONTIER CODE AND INTRODUCTION HERE]
 
 ```[INSERT CODE HERE FOR EFFICIENT FRONTIER HERE]
@@ -69,12 +71,14 @@ Now that we have built out the primary dataset, we can begin to use Machine Lear
 
 ## The Efficient Frontier 2.0: 
 
+[INSERT EFFICIENT FRONTIER 2.0 IMAGES HERE]
 [INSERT THE EFFICIENT FRONTIER 2.0 CODE AND INTRODUCTION HERE]
 
 ```[INSERT CODE HERE FOR EFFICIENT FRONTIER 2.0 HERE]
 ```
 ## Exploratory Data Analysis: Distribution of Key Variables
 
+[INSERT EDA IMAGES HERE]
 ![Intro Image](read_me_images/random_forest.png)
 
 We look at the distribution of the independent variables in our model in order to observe market trends and volatility.
@@ -124,6 +128,7 @@ plt.show()
 
 ## Exploratory Data Analysis: Time Series
 
+[INSERT EDA IMAGES HERE]
 ![Intro Image](read_me_images/random_forest.png)
 
 We utilize time series plots to show how the prices of the independent variables (GLD, VNQ, USO, TSLA, AAPL, AGG, JNK) change over the given time period. We noticed some interesting trends:
@@ -172,6 +177,7 @@ plt.show()
 
 ## Exploratory Data Analysis: Pairplot
 
+[INSERT EDA IMAGES HERE]
 ![Intro Image](read_me_images/random_forest.png)
 
 Pairplot for Exploratory Data Analysis (EDA):
@@ -206,6 +212,7 @@ plt.show()
 
 ## Exploratory Data Analysis: Pairwise Correlation Heatmap
 
+[INSERT EDA IMAGES HERE]
 ![Intro Image](read_me_images/random_forest.png)
 
 We want to identify multicollinearity between independent variables to determine if they should be included in the machine learning models. 
@@ -232,6 +239,7 @@ plt.show()
 
 ## XGBoost Model: 
 
+[INSERT XGBOOST IMAGE HERE]
 ![Intro Image](read_me_images/random_forest.png)
 
 This algorithm yielded a resounding accuracy score in discerning the “Buy” or “Sell” signal.
@@ -243,6 +251,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 ## RandomForest Model: 
 
+[INSERT RANDOM FOREST IMAGE HERE]
 ![Intro Image](read_me_images/random_forest.png)
 
 After backtesting and manual optimization, we found the logistic regression to yield very high accuracy when predicting the correct BUY or SELL classification. 
@@ -254,6 +263,7 @@ from sklearn.ensemble import RandomForestClassifier
 
 ## LogisticRegression Model: 
 
+[INSERT LOGISTIC REGRESSION IMAGE HERE]
 ![Intro Image](read_me_images/random_forest.png)
 
 After backtesting and manual optimization, we found the logistic regression to yield very high accuracy when predicting the correct BUY or SELL classification.  
@@ -264,6 +274,7 @@ After backtesting and manual optimization, we found the logistic regression to y
 
 ## NeuralNetwork Model: 
 
+[INSERT NEURAL NETWORK IMAGE HERE]
 ![Intro Image](read_me_images/random_forest.png)
 
 After backtesting and manual optimization, we found a significant increase in the accuracy score of the model for predicting the correct BUY or SELL classification. 
@@ -283,6 +294,7 @@ After backtesting and manual optimization, we found a significant increase in th
 
 ## Next Steps 
 
+[INSERT IMAGE OF COMPANY BANK LOGOS HERE]
 ![Intro Image](read_me_images/next_steps.png)
 
 We found this classification problem to be very interesting, and found that there were many opportunities to further enhance our model:
