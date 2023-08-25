@@ -151,6 +151,26 @@ Now that we have built out the primary dataset, we can begin to use Machine Lear
 
 ![Intro Image](read_me_images/dataset.png)
 
+## XGBoost Model: 
+
+![Intro Image](read_me_images/random_forest.png)
+
+Our first attempt the predictors using Apples P/E ratio, and 50 and 200 day MA, and included other variables of 1 and 5 year treasury yields and a news score based on sentiment. Running this model resulted in a 57% Precision Score. The second Random Forest attempt using 23 years of price data with predictors of daily Apple; volume, open, high, low and close prices resulted in a 55% Precision score.
+
+```
+#Imprt Random Forest
+from sklearn.ensemble import RandomForestClassifier
+```
+```
+#initial model, n_estimators = number of decision trees, min_sample_spit protects from overfitting, 
+#random_state =1 to be able to re-run model with same results. train = -100 is all rows except last 100 rows.
+model = RandomForestClassifier(n_estimators=175, min_samples_split=100, random_state=1)
+train = data.iloc[:-100]
+test = data.iloc[-100:]
+#predictors used
+predictors = ["Close", "Open", "High", "Low", "Volume"]
+model.fit(train[predictors], train["Signal"])
+
 ## RandomForest Model: 
 
 ![Intro Image](read_me_images/random_forest.png)
