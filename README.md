@@ -47,15 +47,7 @@ df
 
 For example: 
 
-```python
-# Pull aapl ticker with date range "03/32/2023" to "07/03/2023"
-aapl_1 = yf.download("AAPL", start='2023-03-31', end='2023-07-03', interval="1d")
-
-aapl_1['Total Debt'] = aapl_debt.loc['2023-03-31']
-aapl_1['Shares'] = aapl_shares.loc['2023-03-31']
-aapl_1['Cash'] = aapl_cash.loc['2023-03-31']
-aapl_1['EPS'] = 1.53
-aapl_1['EBITDA'] = 31260000000
+```[INSERT CODE HERE FOR DATASET MANIPULATION AND BUILDING]
 ```
 
 > Note: EPS and EBITDA were hard-coded into the data frame. You can view these values in Yahoo Finance. 
@@ -72,18 +64,14 @@ Now that we have built out the primary dataset, we can begin to use Machine Lear
 
 [INSERT THE EFFICIENT FRONTIER CODE AND INTRODUCTION HERE]
 
-```python
-# Call pipeline to run `sentiment-analysis`
-classifier = pipeline('sentiment-analysis')
+```[INSERT CODE HERE FOR EFFICIENT FRONTIER HERE]
 ```
 
 ## The Efficient Frontier 2.0: 
 
 [INSERT THE EFFICIENT FRONTIER 2.0 CODE AND INTRODUCTION HERE]
 
-```python
-# Call pipeline to run `sentiment-analysis`
-classifier = pipeline('sentiment-analysis')
+```[INSERT CODE HERE FOR EFFICIENT FRONTIER 2.0 HERE]
 ```
 ## Exploratory Data Analysis: Distribution of Key Variables
 
@@ -271,8 +259,7 @@ from sklearn.ensemble import RandomForestClassifier
 After backtesting and manual optimization, we found the logistic regression to yield very high accuracy when predicting the correct BUY or SELL classification.  
 
 ```
-#Imprt Random Forest
-from sklearn.ensemble import RandomForestClassifier
+[INSERT LOGISTIC REGRESSION MODEL]
 ```
 
 ## NeuralNetwork Model: 
@@ -282,13 +269,17 @@ from sklearn.ensemble import RandomForestClassifier
 After backtesting and manual optimization, we found a significant increase in the accuracy score of the model for predicting the correct BUY or SELL classification. 
 
 ```
-#Imprt Random Forest
-from sklearn.ensemble import RandomForestClassifier
+[INSERT NEURAL NETWORK REGRESSION MODEL]
 ```
 
 ## [INSERT STREAMLIT HERE]
 
-![Intro Image](read_me_images/logistic_regression_results.png) [INSERT STREAMLIT EXPLANATION OF RESULTS HERE]
+[INSERT SCREENSHOTS OF STREAMLIT HERE]
+![Intro Image](read_me_images/logistic_regression_results.png) [INSERT STREAMLIT EXPLANATION OF RESULTS FOR THE MACHINE LEARNING MODELS HERE]
+
+```
+[INSERT STREAMLIT CODE HERE]
+```
 
 ## Next Steps 
 
