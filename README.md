@@ -1,4 +1,5 @@
-# Analyst_Rating
+# Portfolio Optimization Analyst Rating
+
 
 ## Unlocking Insights 2.0: A Cutting-Edge Approach to Sell-Side Equity Research with Advanced Machine Learning Models
 
@@ -9,7 +10,7 @@ This file will explore Portfolio Optimization utilizing the Efficient Frontier, 
 
 ## Usage: 
 
-> Note: `analyst_rating` is found in main folder. `sentiment_analysis_data` is found the Analysis Folder. The three models can be found in the Machine Learning Folder.
+> Note: `PortOp_Analyst_Rating` is found in the main folder. Datasets, code for models, etc. are found in the branch Folder.
 
 ### Import the following libraries and dependencies: 
 ```
