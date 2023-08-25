@@ -252,6 +252,92 @@ After backtesting and manual optimization, we found the random forest to yield v
 ```
 #Imprt Random Forest
 from sklearn.ensemble import RandomForestClassifier
+
+After incorporating the additional hyperparameters into the code, we observed a notable improvement in the accuracy scores for both the original and newly generated datasets. 
+
+```
+![Machine_learning_app]
+
+Code in Streamlit with hyperparameters
+
+if Model == 'Random Forest':
+        st.subheader('The **Random Forest Regressor** is used to build a regression model using the **Random Forest** algorithm. Try adjusting the hyperparameters!')
+        st.write("## Apple - AAPL")
+        #define the ticker symbol
+        tickerSymbol ='AAPL'
+        #get data on this ticker
+        tickerData = yf.Ticker(tickerSymbol)
+        #get the historical prices for this ticker
+        tickerDf = tickerData.history(period='1d', start='2015-08-01', end='2023-08-01')
+        # Open	High	Low	Close	Volume	Dividends	Stock Splits
+
+        st.write("""
+        ## Closing Price
+        """)
+        st.line_chart(tickerDf.Close)
+        # Displays the dataset
+        st.subheader('Dataset')
+        
+        if uploaded_file is not None:  # Check if a file is uploaded
+            df = pd.read_csv(uploaded_file)
+            df.reset_index(drop=True, inplace=True)
+            df.drop(columns=["Unnamed: 0"], inplace=True)  
+            st.markdown('**Sample of dataset**')
+            st.write(df)
+
+            # Model building
+            X = df.iloc[:,:-1]  # Using all columns except for the last column as X
+            Y = df.iloc[:,-1]   # Selecting the last column as Y
+
+            # Data splitting
+            X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=(100-split_size)/100)
+
+            st.markdown('**Data splits**')
+            st.write('Training set')
+            st.info(X_train.shape)
+            st.write('Test set')
+            st.info(X_test.shape)
+
+            st.markdown('**Variable details**:')
+            st.write('X variable')
+            st.info(list(X.columns))
+            st.write('Y variable')
+            st.info(Y.name)
+
+            rf = RandomForestRegressor(n_estimators=parameter_n_estimators,
+            random_state=parameter_random_state,
+            max_features=parameter_max_features,
+            criterion=parameter_criterion,
+            min_samples_split=parameter_min_samples_split,
+            min_samples_leaf=parameter_min_samples_leaf,
+            bootstrap=parameter_bootstrap,
+            #oob_score=parameter_oob_score,
+            n_jobs=parameter_n_jobs)
+            rf.fit(X_train, Y_train)
+
+            st.subheader('Model Performance')
+
+            st.markdown('**Training set**')
+            Y_pred_train = rf.predict(X_train)
+            st.write('Train Accuracy Score:')
+            st.info( r2_score(Y_train, Y_pred_train) )
+
+            st.write('Error (MSE or MAE):')
+            st.info( mean_squared_error(Y_train, Y_pred_train) )
+
+            st.markdown('**Test set**')
+            Y_pred_test = rf.predict(X_test)
+            st.write('Test Accuracy Score:')
+            st.info( r2_score(Y_test, Y_pred_test) )
+
+            st.write('Error (MSE or MAE):')
+            st.info( mean_squared_error(Y_test, Y_pred_test) )
+
+            st.subheader('Model Parameters')
+            st.write(rf.get_params())
+               
+        else:
+            st.write("Upload a CSV file to start model training.")
 ```
 
 ## LogisticRegression Model: 
@@ -262,7 +348,56 @@ from sklearn.ensemble import RandomForestClassifier
 After backtesting and manual optimization, we found the logistic regression to yield very high accuracy when predicting the correct BUY or SELL classification.  
 
 ```
-[INSERT LOGISTIC REGRESSION MODEL]
+elif Model == 'Logistic Regression':
+        st.subheader("Our best model was the Logistic Regression Model. This was in line with our expectations, given the formatting of our dataset and the fact that this is ultimately a classification problem. Please see the image outlining the precision, recall, F1 score, support, and accuracy score of the model.")
+        st.image("logistic_regression1.png", width=800)
+        st.image("logistic_regression_results.png", width=800)
+        #READ IN DATA
+        df= pd.read_csv("max_rating1.csv")
+        df.head()
+        # Select features and target variable
+        X = df.drop(columns=["Signal"])
+        y = df["Signal"]
+
+        # Split the data into training and testing sets
+        train_size = int(len(X) * 0.8)
+        X_train, X_test = X[:train_size], X[train_size:]
+        y_train, y_test = y[:train_size], y[train_size:]
+
+        # Create a pipeline for preprocessing and modeling
+        pipeline = Pipeline([
+            ("scaler", StandardScaler()),
+            ("model", LogisticRegression())
+        ])
+
+        # Define the hyperparameters grid for grid search
+        param_grid = {
+            "model__C": [0.1, 1.0, 10.0],
+            "model__penalty": ["l1", "l2"],
+        }
+
+        # Perform grid search for hyperparameter tuning
+        grid_search = GridSearchCV(pipeline, param_grid, cv=3)
+        grid_search.fit(X_train, y_train)
+
+        # Get the best model
+        best_model = grid_search.best_estimator_
+
+        # Evaluate the model on training data
+        y_train_pred = best_model.predict(X_train)
+        train_report = classification_report(y_train, y_train_pred)
+        st.subheader("Training Report:")
+        st.text(train_report)
+
+        # Evaluate the model on testing data
+        y_test_pred = best_model.predict(X_test)
+        test_report = classification_report(y_test, y_test_pred)
+        st.subheader("Testing Report:")
+        st.text(test_report)
+    elif Model == 'Neural Network':
+        st.subheader("After backtesting and manual optimization, we found the neural network to be less than ideal for predicting the correct BUY or SELL classification. We utilized 2 models. The first model yielded an accuracy score of 0.4701, while the second model gave 0.5203 accuracy score. The difference between the first two models can be found within the hyperparameter tuning. For example, we changed the loss function from Categorical Cross-Entropy to Mean Squared Error, number of hidden nodes from 10 to 20, number of neurons form 2 to 3, and optimizer function from sigmoid to adam.")
+        st.image("neural network.png")        
+
 ```
 
 ## NeuralNetwork Model: 
