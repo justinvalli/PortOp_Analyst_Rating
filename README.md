@@ -286,41 +286,41 @@ data.plot.line(y="Close", use_index=True)
 Using 'EBIDTA', 'EV/EBITDA', 'EPS', 'P/E', '1 YR', '5 YR', '30 YR', '50 MA', '200 MA', 'News', 'News Score', 'Percent Change', 'Target - B/H/S (based on close - daily % change). We had to change the news and target columns  to numerical values  so that the model would be able to accept the data.
 
 ```
-# Select features and target variable
+## Select features and target variable
 X = df.drop(columns=["Target - B/H/S (based on close - daily % change)"])
 y = df["Target - B/H/S (based on close - daily % change)"]
 
-# Split the data into training and testing sets
+## Split the data into training and testing sets
 train_size = int(len(X) * 0.8)
 X_train, X_test = X[:train_size], X[train_size:]
 y_train, y_test = y[:train_size], y[train_size:]
 
-# Create a pipeline for preprocessing and modeling
+## Create a pipeline for preprocessing and modeling
 pipeline = Pipeline([
     ("scaler", StandardScaler()),
     ("model", LogisticRegression())
 ])
 
-# Define the hyperparameters grid for grid search
+## Define the hyperparameters grid for grid search
 param_grid = {
     "model__C": [0.1, 1.0, 10.0],
     "model__penalty": ["l1", "l2"],
 }
 
-# Perform grid search for hyperparameter tuning
+## Perform grid search for hyperparameter tuning
 grid_search = GridSearchCV(pipeline, param_grid, cv=3)
 grid_search.fit(X_train, y_train)
 
-# Get the best model
+## Get the best model
 best_model = grid_search.best_estimator_
 
-# Evaluate the model on training data
+## Evaluate the model on training data
 y_train_pred = best_model.predict(X_train)
 train_report = classification_report(y_train, y_train_pred)
 print("Training Report:")
 print(train_report)
 
-# Evaluate the model on testing data
+## Evaluate the model on testing data
 y_test_pred = best_model.predict(X_test)
 test_report = classification_report(y_test, y_test_pred)
 print("Testing Report:")
@@ -335,13 +335,13 @@ After backtesting and manual optimization, we found the neural network to be les
 
 Model 1
 ```
-# Compile the Sequential model
+## Compile the Sequential model
 nn.compile(loss="binary_crossentropy", optimizer="sigmoid", metrics=["accuracy"])
 fit_model = nn.fit(X_train_scaled, y_train, epochs = 50)
 ```
 Model 2
 ```
-# Compile the Sequential model
+## Compile the Sequential model
 nn.compile(loss="mean_squared_error", optimizer="adam", metrics=["accuracy"])
 fit_model = nn.fit(X_train_scaled, y_train, epochs = 50)
 ```
