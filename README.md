@@ -254,7 +254,7 @@ from sklearn.ensemble import RandomForestClassifier
 [INSERT RANDOM FOREST IMAGE HERE]
 ![Intro Image](read_me_images/random_forest.png)
 
-After backtesting and manual optimization, we found the logistic regression to yield very high accuracy when predicting the correct BUY or SELL classification. 
+After backtesting and manual optimization, we found the random forest to yield very high accuracy when predicting the correct BUY or SELL classification. 
 
 ```
 #Imprt Random Forest
