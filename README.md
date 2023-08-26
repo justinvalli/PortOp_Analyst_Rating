@@ -710,6 +710,7 @@ print(f"Loss: {model_loss}, Accuracy: {model_accuracy}")
 
 We included a Streamlit Component for the machine learning models. Please see below. 
 
+Logistic Regression
 ```
 elif Model == 'Logistic Regression':
         st.subheader("Our best model was the Logistic Regression Model. This was in line with our expectations, given the formatting of our dataset and the fact that this is ultimately a classification problem. Please see the image outlining the precision, recall, F1 score, support, and accuracy score of the model.")
