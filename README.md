@@ -180,7 +180,7 @@ Now that we have built out the primary dataset, we can begin to use Machine Lear
 
 ## The Efficient Frontier: 
 
-![Intro Image](read_me_images/efficient_frontier_1.png)
+![Intro Image](read_me_images/efficient_frontier_2.png)
 
 The efficient frontier is a concept in the modern portfolio theory that represents the optimal combination of assets that maximizes expected returns for a given level of risk OR minimizes risk for a given level of expected returns. It shows the range of possible portfolios that offer the best trade-off between risk and reward, to help investors optimize based on their risk tolerance.
 
