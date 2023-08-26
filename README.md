@@ -182,6 +182,8 @@ Now that we have built out the primary dataset, we can begin to use Machine Lear
 
 ![Intro Image](read_me_images/efficient_frontier_1.png)
 
+The efficient frontier is a concept in the modern portfolio theory that represents the optimal combination of assets that maximizes expected returns for a given level of risk OR minimizes risk for a given level of expected returns. It shows the range of possible portfolios that offer the best trade-off between risk and reward, to help investors optimize based on their risk tolerance.
+
 ```# Grab the Alpaca API Key
 #alpaca_api_key = os.environ.get('PKT9GZRNU8ZZ0UAWZ5I3')
 # alpaca_secret_key = os.environ.get('JNKg1fGpTBYCJlCaCueN3vnfKZOK39VhhfO6DKDE')
@@ -306,14 +308,6 @@ https://files.slack.com/files-pri/T04N7AM0XJB-F05PGJ32222/screen_shot_2023-08-26
 https://files.slack.com/files-pri/T04N7AM0XJB-F05PP4SH1LK/screen_shot_2023-08-26_at_11.56.57_am.png
 ```
 
-## The Efficient Frontier 2.0: 
-
-![Intro Image](read_me_images/efficient_frontier_2.png)
-
-The efficient frontier is a concept in the modern portfolio theory that represents the optimal combination of assets that maximizes expected returns for a given level of risk OR minimizes risk for a given level of expected returns. It shows the range of possible portfolios that offer the best trade-off between risk and reward, to help investors optimize based on their risk tolerance.
-
-```[INSERT CODE HERE FOR EFFICIENT FRONTIER 2.0 HERE]
-```
 ## Exploratory Data Analysis: Distribution of Key Variables
 
 ![Intro Image](read_me_images/histogram.png)
