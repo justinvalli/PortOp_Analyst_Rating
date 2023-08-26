@@ -706,7 +706,7 @@ print(f"Loss: {model_loss}, Accuracy: {model_accuracy}")
 
 ## Streamlit Component (Random Forest & Logistic Regression):
 
-![Intro Image](read_me_images/logistic_regression_results.png)
+![Intro Image](read_me_images/machine_learning_app.png)
 
 We included a Streamlit Component for the machine learning models. Please see below. 
 
