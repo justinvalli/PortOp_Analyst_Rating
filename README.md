@@ -472,28 +472,82 @@ plt.show()
 This algorithm yielded a resounding accuracy score in discerning the “Buy” or “Sell” signal.
 
 ```
-#Imprt Random Forest
-from sklearn.ensemble import RandomForestClassifier
-```
+# Read the applicants_data.csv file from the Resources folder into a Pandas DataFrame
+AAPL_data_df = df = pd.read_csv("max_rating.csv")
 
-## RandomForest Model: 
-![Intro Image](read_me_images/random_forest.png)
 
-After backtesting and manual optimization, we found the random forest to yield very high accuracy when predicting the correct BUY or SELL classification. 
+# Review the DataFrame
+AAPL_data_df
+# Create a list of categorical variables
+categorical_variables = AAPL_data_df[['Signal']].columns.tolist()
 
-```
-#Imprt Random Forest
-from sklearn.ensemble import RandomForestClassifier
-```
+# Display the categorical variables list
+categorical_variables
 
-## LogisticRegression Model: 
+# Create a OneHotEncoder instance
+enc = OneHotEncoder(sparse=False)
+# Encode the categorcal variables using OneHotEncoder
+encoded_data = enc.fit_transform(AAPL_data_df[categorical_variables])
+# Create a DataFrame with the encoded variables
+encoded_df = pd.DataFrame(encoded_data, columns = enc.get_feature_names_out(categorical_variables))
 
-![Intro Image](read_me_images/logistic_regression_results.png)
+# Review the DataFrame
+encoded_df
 
-After backtesting and manual optimization, we found the logistic regression to yield very high accuracy when predicting the correct BUY or SELL classification.  
+# Add the numerical variables from the original DataFrame to the one-hot encoding DataFrame
+numerical_variables = AAPL_data_df.select_dtypes(["int64", "float64"])
+encoded_df = pd.concat([encoded_df, numerical_variables], axis = 1)
 
-```
-[INSERT LOGISTIC REGRESSION MODEL]
+# Review the Dataframe
+encoded_df
+
+# Define the target set y using the "Target - B/H/S (based on close - daily % change") column
+y = encoded_df["Signal"]
+
+# Display a sample of y
+y
+
+# Define features set X by selecting all columns but IS_SUCCESSFUL
+X = encoded_df.drop(columns = "Signal")
+
+# Review the features DataFrame
+X.dtypes
+# Split the preprocessed data into a training and testing dataset
+# Assign the function a random_state equal to 1
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 1)
+
+# Create a StandardScaler instance
+scaler = StandardScaler()
+
+# Fit the scaler to the features training dataset
+X_scaler = scaler.fit(X_train)
+
+# Fit the scaler to the features training dataset
+X_train_scaled = X_scaler.transform(X_train)
+X_test_scaled = X_scaler.transform(X_test)
+
+model = XGBClassifier(
+    n_estimators=100,  # Number of boosting rounds (trees)
+    max_depth=3,       # Maximum depth of each tree
+    learning_rate=0.1, # Step size at each iteration
+    random_state=42
+)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+model = XGBClassifier(
+    n_estimators=100,  # Number of boosting rounds (trees)
+    max_depth=3,       # Maximum depth of each tree
+    learning_rate=0.1, # Step size at each iteration
+    random_state=42
+)
+
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print(f"Accuracy: {accuracy:.2f}")
+
 ```
 
 ## NeuralNetwork Model: 
@@ -503,10 +557,154 @@ After backtesting and manual optimization, we found the logistic regression to y
 After backtesting and manual optimization, we found a significant increase in the accuracy score of the model for predicting the correct BUY or SELL classification. 
 
 ```
-[INSERT NEURAL NETWORK REGRESSION MODEL]
+# Read the applicants_data.csv file from the Resources folder into a Pandas DataFrame
+AAPL_data_df = df = pd.read_csv(
+    Path("max_rating.csv") 
+)
+
+
+# Review the DataFrame
+AAPL_data_df
+
+# Review the data types associated with the columns
+print(AAPL_data_df.dtypes)
+
+# Create a list of categorical variables
+categorical_variables = AAPL_data_df[['Signal']].columns.tolist()
+
+# Display the categorical variables list
+categorical_variables
+# Create a OneHotEncoder instance
+enc = OneHotEncoder(sparse=False)
+
+# Encode the categorcal variables using OneHotEncoder
+encoded_data = enc.fit_transform(AAPL_data_df[categorical_variables])
+
+# Create a DataFrame with the encoded variables
+encoded_df = pd.DataFrame(encoded_data, columns = enc.get_feature_names_out(categorical_variables))
+
+# Review the DataFrame
+encoded_df
+
+# Add the numerical variables from the original DataFrame to the one-hot encoding DataFrame
+numerical_variables = AAPL_data_df.select_dtypes(["int64", "float64"])
+encoded_df = pd.concat([encoded_df, numerical_variables], axis = 1)
+
+# Review the Dataframe
+encoded_df
+
+# Define the target set y using the "Target - B/H/S (based on close - daily % change") column
+y = encoded_df["Signal"]
+
+# Display a sample of y
+y
+
+# Define features set X by selecting all columns but IS_SUCCESSFUL
+X = encoded_df.drop(columns = "Signal")
+
+# Review the features DataFrame
+X.dtypes
+
+# Split the preprocessed data into a training and testing dataset
+# Assign the function a random_state equal to 1
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 1)
+
+# Create a StandardScaler instance
+scaler = StandardScaler()
+
+# Fit the scaler to the features training dataset
+X_scaler = scaler.fit(X_train)
+
+# Fit the scaler to the features training dataset
+X_train_scaled = X_scaler.transform(X_train)
+X_test_scaled = X_scaler.transform(X_test)
+
+# Define the the number of inputs (features) to the model
+number_input_features = number_input_features = X_train_scaled.shape[1]
+
+# Review the number of features
+number_input_features
+
+# Define the number of neurons in the output layer
+number_output_neurons = 1
+
+# Define hidden layer 1 and 2
+
+hidden_nodes_layer1 = 11
+
+# Create the Sequential model instance
+nn = Sequential()
+
+# Add the first hidden layer
+nn.add(Dense(units=hidden_nodes_layer1, input_dim=number_input_features, activation="sigmoid"))
+
+# Add the output layer to the model specifying the number of output neurons and activation function
+nn.add(Dense(units=number_output_neurons, activation="sigmoid"))
+
+# Display the Sequential model summary
+nn.summary()
+
+# Compile the Sequential model
+nn.compile(loss="mean_squared_error", optimizer="adam", metrics=["accuracy"])
+fit_model = nn.fit(X_train_scaled, y_train, epochs = 50)
+
+help(nn.compile)
+
+X_train_scaled
+
+# Evaluate the model loss and accuracy metrics using the evaluate method and the test data
+model_loss, model_accuracy = nn.evaluate(X_test_scaled, y_test)
+
+# Display the model loss and accuracy results
+print(f"Loss: {model_loss}, Accuracy: {model_accuracy}")
+
+y_test[:15]
+nn.predict(X_test_scaled)
+
+# Define the the number of inputs (features) to the model
+number_input_features = len(X_train.iloc[0])
+
+# Review the number of features
+number_input_features
+
+# Define the number of neurons in the output layer
+number_output_neurons_A1 = 3
+
+# Define the number of hidden nodes for the first hidden layer
+hidden_nodes_layer1_A1 = 20
+
+# Review the number of hidden nodes in the first layer
+hidden_nodes_layer1_A1
+
+# Create the Sequential model instance
+nn_A1 = Sequential()
+
+# First hidden layer
+nn_A1.add(Dense(units=hidden_nodes_layer1_A1, input_dim=number_input_features, activation="sigmoid"))
+
+# Output layer
+nn_A1.add(Dense(units= number_output_neurons_A1, activation="sigmoid"))
+
+# Check the structure of the model
+nn_A1.summary
+
+# Compile the Sequential model
+nn_A1.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+
+# Fit the model using 50 epochs and the training data
+fit_model_A1 = nn.fit(X_train_scaled, y_train, epochs=50)
+
+print("Alternative Model 1 Results")
+
+# Evaluate the model loss and accuracy metrics using the evaluate method and the test data
+model_loss, model_accuracy = nn_A1.evaluate(X_test_scaled, y_test)
+
+# Display the model loss and accuracy results
+print(f"Loss: {model_loss}, Accuracy: {model_accuracy}")
+
 ```
 
-## Streamlit Component:
+## Streamlit Component (Random Forest & Logistic Regression):
 
 ![Intro Image](read_me_images/logistic_regression_results.png)
 
