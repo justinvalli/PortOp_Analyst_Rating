@@ -187,7 +187,6 @@ Now that we have built out the primary dataset, we can begin to use Machine Lear
 ## The Efficient Frontier: 
 
 ![Intro Image](read_me_images/efficient_frontier_1.png)
-[INSERT THE EFFICIENT FRONTIER CODE AND INTRODUCTION HERE]
 
 ```# Grab the Alpaca API Key
 #alpaca_api_key = os.environ.get('PKT9GZRNU8ZZ0UAWZ5I3')
@@ -316,7 +315,8 @@ https://files.slack.com/files-pri/T04N7AM0XJB-F05PP4SH1LK/screen_shot_2023-08-26
 ## The Efficient Frontier 2.0: 
 
 ![Intro Image](read_me_images/efficient_frontier_2.png)
-[INSERT THE EFFICIENT FRONTIER 2.0 CODE AND INTRODUCTION HERE]
+
+The efficient frontier is a concept in the modern portfolio theory that represents the optimal combination of assets that maximizes expected returns for a given level of risk OR minimizes risk for a given level of expected returns. It shows the range of possible portfolios that offer the best trade-off between risk and reward, to help investors optimize based on their risk tolerance.
 
 ```[INSERT CODE HERE FOR EFFICIENT FRONTIER 2.0 HERE]
 ```
@@ -639,8 +639,6 @@ if Model == 'Random Forest':
 ```
 
 ## Next Steps 
-
-[INSERT IMAGE OF COMPANY BANK LOGOS HERE]
 ![Intro Image](read_me_images/next_steps.png)
 
 We found this classification problem to be very interesting, and found that there were many opportunities to further enhance our model:
