@@ -168,12 +168,6 @@ df_max = imp_mean.fit_transform(df_max)
 ​
 ```
 ​
-The final data will look like this: 
-​
-![Final Data 1]('final_data_1.png')
-​
-![Final Data 2]('final_data_2.png')
-​
 Finally, export to a CSV file for Machine Learning Scripts!
 ​
 ```python
